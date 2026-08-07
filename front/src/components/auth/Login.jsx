@@ -42,6 +42,11 @@ const Login = () => {
         toast.success(res.data.message);
       }
     } catch (err) {
+      if (err.response?.data?.notVerified) {
+        toast.error(err.response.data.message);
+        navigate("/verify-otp", { state: { email: err.response.data.email || input.email } });
+        return;
+      }
       toast.error(err.response?.data?.message || "Login failed");
     } finally {
       dispatch(setLoading(false));

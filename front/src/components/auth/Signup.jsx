@@ -51,8 +51,8 @@ const Signup = () => {
         withCredentials: true,
       });
       if (res.data.success) {
-        navigate("/login");
         toast.success(res.data.message);
+        navigate("/verify-otp", { state: { email: input.email } });
       }
     } catch (error) {
       console.log(error);
